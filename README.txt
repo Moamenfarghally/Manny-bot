@@ -10,6 +10,8 @@ Manny's discord bot!
 --- Files
 - bot.py → main bot file
 - cogs/ → bot commands
+- debug/ → debugs and tests
+- scrips/ → Bots scripts to make things easier
 
 --- Run the bot:
 python bot.py
