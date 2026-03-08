@@ -8,8 +8,8 @@ class Lexi(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    async def get_food_gif(self):
-        # Much larger list of diverse foods
+    async def get_food_gif(self)
+    
         food_searches = [
             "Burger", "Pizza", "Shrimp", "Sushi", "Pasta", "Ramen", "Fried Chicken", "Donuts", 
             "Cake", "Waffles", "Ice Cream", "Steak", "Curry", "Sandwich", "Spaghetti", "Fries",
