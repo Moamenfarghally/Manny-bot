@@ -1,4 +1,3 @@
-# bot.py
 import discord
 from discord.ext import commands, tasks
 import os
@@ -15,12 +14,12 @@ def load_config():
 config = load_config()
 
 intents = discord.Intents.default()
-intents.message_content = True  # Required for !prefix commands
+intents.message_content = True  
 
 
 class MyBot(commands.Bot):
     def __init__(self):
-        # Enable BOTH / and ! commands
+      
         super().__init__(
             command_prefix=commands.when_mentioned_or("!", "/"),
             intents=intents
@@ -29,7 +28,7 @@ class MyBot(commands.Bot):
         self.last_modified = {}
 
     async def setup_hook(self):
-        # Load all cogs
+    
         for file in os.listdir("./cogs"):
             if file.endswith(".py"):
                 try:
@@ -38,19 +37,14 @@ class MyBot(commands.Bot):
                 except Exception as e:
                     print(f"Failed to load {file}: {e}")
 
-        # Sync slash commands
+       
         await self.tree.sync()
         print("Slash commands synced.")
 
-        # Start auto-reloader
-        # self.watch_cogs.start()  # TEMPORARILY DISABLED
 
     async def on_ready(self):
         print(f"Bot logged in as {self.user}")
 
-    # ---------------------------------------
-    # AUTO RELOAD SYSTEM
-    # ---------------------------------------
     @tasks.loop(seconds=1.5)
     async def watch_cogs(self):
         for file in os.listdir("./cogs"):
@@ -58,12 +52,12 @@ class MyBot(commands.Bot):
                 path = f"./cogs/{file}"
                 last_edit = os.path.getmtime(path)
 
-                # first-time tracking
+               
                 if file not in self.last_modified:
                     self.last_modified[file] = last_edit
                     continue
 
-                # detect change
+               
                 if last_edit != self.last_modified[file]:
                     self.last_modified[file] = last_edit
                     try:
@@ -81,9 +75,8 @@ class MyBot(commands.Bot):
         await self.wait_until_ready()
 
 
-# Run bot
 bot = MyBot()
-TOKEN = config.get("bot_token", "")  # Load from config
+TOKEN = config.get("bot_token", "")  
 if not TOKEN:
     print("❌ Bot token not found in config.json")
     exit(1)
